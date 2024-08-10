@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute Letter</title>
+    <style>
+       :root {
+    --primary: #fff;
+    --bg-color: rgb(5, 53, 61);
+    --bg-envelope-color: #f5edd1;
+    --envelope-tab: #ecdeb8;
+    --envelope-cover: #e6cfa7;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --txt-color: #444;
+    --heart-color: rgb(252, 0, 231);
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    display: grid;
+    place-items: center;
+}
+
+.container > .envelope-wrapper {
+    background: var(--bg-envelope-color);
+    box-shadow: 0 0 40px var(--shadow-color);
+    position: relative;
+}
+
+.container > .envelope-wrapper > .envelope {
+    position: relative;
+    width: 300px;
+    height: 230px;
+}
+
+.container > .envelope-wrapper > .envelope::before {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    border-top: 130px solid var(--envelope-tab);
+    border-right: 150px solid transparent;
+    border-left: 150px solid transparent;
+    top: 0;
+    transform-origin: top;
+    transition: all 0.5s ease-in-out 0.7s;
+}
+
+.container > .envelope-wrapper > .envelope::after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    border-top: 130px solid transparent;
+    border-left: 150px solid var(--envelope-cover);
+    border-right: 150px solid var(--envelope-cover);
+    border-bottom: 100px solid var(--envelope-cover);
+    bottom: 0;
+}
+
+.letter {
+    position: absolute;
+    right: 10%;
+    bottom: 10%;
+    width: 80%;
+    height: 80%;
+    background: var(--primary);
+    padding: 15px; /* Adjusted padding */
+    box-shadow: 0 0 10px var(--shadow-color);
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+    transform: translateY(0); /* Default position inside the envelope */
+}
+
+.letter > .text {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 8px; /* Reduced font size */
+    color: var(--txt-color);
+    text-align: left;
+    line-height: 1.4; /* Adjusted line height */
+}
+
+.heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    background-color: var(--heart-color);
+    transform: translate(-50%, -50%) rotate(-45deg); /* Rotate 90 degrees to the left */
+    z-index: 3;
+    cursor: pointer;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--heart-color);
+}
+
+.heart::before {
+    top: -15px;
+    left: 0;
+}
+
+.heart::after {
+    left: 15px;
+    top: 0;
+}
+
+.flap > .envelope::before {
+    z-index: 0;
+    transform: rotateX(180deg);
+}
+
+.flap > .envelope .letter {
+    bottom: 0; /* Adjust this value if needed */
+    transform: translateY(-150%); /* Slide letter more out */
+}
+
+.flap > .heart {
+    transform: rotate(90deg);
+    transition-delay: 0.4s;
+}
+
+.envelope-wrapper {
+    position: relative;
+    cursor: pointer; /* Indicates that the envelope is clickable */
+}
+
+
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="envelope-wrapper">
+            <div class="envelope">
+                <div class="letter">
+                    <div class="text">
+                        <strong>Dear Khushi😊</strong>
+                        <p>
+                            I just wanted to say that.🤭 <br>
+                            I love talking with you and I think you also feel the same😊😊 <br>
+                            Whenever I see that your message has come, <br>
+                            I feel so happy that I cannot even tell you.😭 <br>
+                            At Last but not the least I wanted to say that <br>
+                             I like you from the bottom of my heart🥰🥰.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="heart"></div>
+        </div>
+    </div>
+    <script>
+        const envelope = document.querySelector('.envelope-wrapper');
+        envelope.addEventListener('click', () => {
+            envelope.classList.toggle('flap');
+        });
+    </script>
+</body>
+</html>
